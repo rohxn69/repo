@@ -2,41 +2,40 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Straight2Pointt</title>
+<title>RawBanana</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;500;600&family=Oswald:wght@500;600&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#DBC99E;--card:#F1E8D0;--ink:#1E1A12;--rust:#C4481F;--rust2:#E0572B;--mute:#6f6544;--mono:"IBM Plex Mono",ui-monospace,Menlo,monospace}
+:root{--bg:#FFE45C;--card:#FFF8D6;--ink:#2B2300;--accent:#3F7D20;--hi:#FFE45C;--mute:#7a6a1e}
 *{box-sizing:border-box;margin:0}
 html,body{height:100%}
-body{font-family:var(--mono);color:var(--ink);display:flex;flex-direction:column;overflow:hidden;background-color:var(--bg);background-image:linear-gradient(rgba(30,26,18,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(30,26,18,.06) 1px,transparent 1px);background-size:28px 28px}
-header{padding:calc(env(safe-area-inset-top,0px) + 16px) 14px 8px}
-h1{font-family:"Bebas Neue","Oswald",Impact,sans-serif;font-weight:400;font-size:2.6rem;line-height:.95;letter-spacing:.01em;text-transform:uppercase;margin-bottom:12px}
-h1 b{color:var(--rust);font-weight:400}
-#q{width:100%;font:inherit;font-size:.9rem;padding:13px 14px;border:1.5px dashed var(--ink);border-radius:14px;background:var(--card);color:var(--ink);outline:none}
-#q::placeholder{color:var(--mute)}
-#q:focus{border-style:solid;border-color:var(--rust);box-shadow:3px 3px 0 var(--rust)}
-main{flex:1;overflow-y:auto;padding:8px 14px 16px}
+body{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;color:var(--ink);display:flex;flex-direction:column;overflow:hidden;background-color:var(--bg);background-image:linear-gradient(rgba(43,35,0,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(43,35,0,.07) 1px,transparent 1px);background-size:28px 28px}
+header{padding:calc(env(safe-area-inset-top,0px) + 18px) 14px 6px}
+h1{display:flex;align-items:center;justify-content:center;gap:0;font-family:"Bebas Neue","Oswald",Impact,sans-serif;font-weight:400;font-size:2.8rem;line-height:.95;letter-spacing:.01em;text-transform:uppercase}
+h1 b{color:var(--accent);font-weight:400}
+.logo{display:block;position:relative;width:56px;height:56px;flex:none;margin-right:-10px}
+.logo canvas{display:block;width:100%;height:100%;filter:drop-shadow(1px 2px 1.5px rgba(43,35,0,.35))}
+main{flex:1;overflow-y:auto;padding:10px 14px 16px}
 #grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
-.card{display:flex;flex-direction:column;gap:6px;background:var(--card);border:1px solid rgba(30,26,18,.25);border-top:3px dashed var(--rust);border-radius:12px;padding:7px;box-shadow:1px 2px 4px rgba(30,26,18,.25);animation:pop .3s ease-out both}
+.card{display:flex;flex-direction:column;gap:6px;background:var(--card);border:1px solid rgba(43,35,0,.25);border-top:3px dashed var(--accent);border-radius:12px;padding:7px;box-shadow:1px 2px 4px rgba(43,35,0,.25);animation:pop .3s ease-out both}
 @keyframes pop{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-.id{align-self:flex-start;border:1px solid var(--rust);color:var(--rust);border-radius:2px;padding:0 5px;font-weight:600;font-size:.68rem;letter-spacing:.04em}
+.id{align-self:flex-start;border:1px solid var(--accent);color:var(--accent);border-radius:3px;padding:0 5px;font-weight:600;font-size:.68rem;letter-spacing:.04em}
 .name{font-family:"Oswald",sans-serif;font-weight:500;font-size:.88rem;line-height:1.15;min-height:2.3em;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
 .card a{display:block;text-align:center;text-decoration:none;font-weight:500;font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;padding:6px 2px;border-radius:8px;background:var(--ink);color:var(--card)}
-.card a:active{background:var(--rust)}
+.card a:active{background:var(--accent)}
 .empty{grid-column:1/-1;text-align:center;color:var(--mute);font-size:.8rem;padding:40px 10px}
 
 /* radio-dial letter picker */
-nav{position:relative;background:var(--ink);border-top:3px dashed var(--rust);padding:16px 0 calc(env(safe-area-inset-bottom,0px) + 8px)}
-nav::before{content:"";position:absolute;left:50%;top:0;margin-left:-8px;border:8px solid transparent;border-top:11px solid var(--rust2);border-bottom:0;z-index:2;pointer-events:none}
+nav{position:relative;z-index:3;background:var(--ink);border-top:3px dashed var(--accent);padding:16px 0 calc(env(safe-area-inset-bottom,0px) + 8px)}
+nav::before{content:"";position:absolute;left:50%;top:0;margin-left:-8px;border:8px solid transparent;border-top:11px solid var(--hi);border-bottom:0;pointer-events:none}
 #wheel{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch;-webkit-mask-image:linear-gradient(90deg,transparent,#000 22%,#000 78%,transparent);mask-image:linear-gradient(90deg,transparent,#000 22%,#000 78%,transparent)}
 #wheel::-webkit-scrollbar{display:none}
-#wheel i{flex:0 0 52px;height:70px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:6px;scroll-snap-align:center;cursor:pointer;font-style:normal;user-select:none;color:#7d7355;font-weight:500;font-size:1.05rem}
-#wheel i::after{content:"";width:1.5px;height:10px;background:#4d4630;transition:height .2s,background .2s}
+#wheel i{flex:0 0 52px;height:70px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:6px;scroll-snap-align:center;cursor:pointer;font-style:normal;user-select:none;color:#9c8a35;font-weight:500;font-size:1.05rem}
+#wheel i::after{content:"";width:1.5px;height:10px;background:#5a4d12;transition:height .2s,background .2s}
 #wheel i.has{color:var(--card)}
 #wheel i span{display:block;transition:transform .2s,color .2s}
-#wheel i.on span{transform:translateY(-6px) scale(1.7);color:var(--rust2);font-weight:600}
-#wheel i.on::after{height:22px;background:var(--rust2)}
+#wheel i.on span{transform:translateY(-6px) scale(1.7);color:var(--hi);font-weight:600}
+#wheel i.on::after{height:22px;background:var(--hi)}
 #wheel i.spacer{flex:0 0 calc(50% - 26px);pointer-events:none}
 #wheel i.spacer::after{display:none}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
@@ -45,8 +44,7 @@ nav::before{content:"";position:absolute;left:50%;top:0;margin-left:-8px;border:
 </head>
 <body>
 <header>
-  <h1>Straight<b>2</b>Pointt</h1>
-  <input id="q" type="search" placeholder="Search A01, B12 or a tool name" autocomplete="off" enterkeyhint="search">
+  <h1><span class="logo" aria-hidden="true"><canvas id="b3d"></canvas></span><span><b>Raw</b>Banana</span></h1>
 </header>
 <main id="list"><div id="grid"></div></main>
 <nav><div id="wheel"></div></nav>
@@ -58,7 +56,6 @@ nav::before{content:"";position:absolute;left:50%;top:0;margin-left:-8px;border:
    Lines starting with # are ignored. */
 const DATA = `
 A01 | Inbox Zero | https://www.getinboxzero.com/
-B01 | Inbox Zero | https://www.getinboxzero.com/
 `;
 /* ================================== */
 
@@ -68,7 +65,8 @@ const TOOLS = DATA.split("\n").map(l => l.trim()).filter(l => l && l[0] !== "#")
 }).filter(x => x.id && x.link);
 
 const L = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
-const grid = document.getElementById("grid"), list = document.getElementById("list"), wheel = document.getElementById("wheel"), q = document.getElementById("q");
+const grid = document.getElementById("grid"), list = document.getElementById("list"), wheel = document.getElementById("wheel");
+const calm = matchMedia("(prefers-reduced-motion: reduce)").matches;
 let current = "A", t;
 
 const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
@@ -77,31 +75,11 @@ const used = new Set(TOOLS.map(x => x.id[0].toUpperCase()));
 wheel.innerHTML = '<i class="spacer"></i>' + L.map(c => `<i data-l="${c}" class="${used.has(c)?"has":""}"><span>${c}</span></i>`).join("") + '<i class="spacer"></i>';
 const items = [...wheel.querySelectorAll("[data-l]")];
 
-function card(x){
-  return `<div class="card"><span class="id">${esc(x.id)}</span><div class="name">${esc(x.name)}</div>
-  <a href="${esc(x.link)}" target="_blank" rel="noopener sponsored">Get link</a></div>`;
-}
-
-// "a1", "a 01", "A-01" all become the same key
-const squash = s => String(s).toLowerCase().replace(/[^a-z0-9]/g,"");
-const key = s => squash(s).replace(/^([a-z])0+(?=\d)/,"$1");
-let shown = [], exact = false;
-
 function render(){
-  const raw = q.value.trim();
-  let res;
-  exact = false;
-  if(raw){
-    const k = key(raw), sq = squash(raw), nm = raw.toLowerCase();
-    res = TOOLS.filter(x => key(x.id) === k);
-    if(res.length){ exact = true; }
-    else res = TOOLS.filter(x => key(x.id).startsWith(k) || squash(x.id).startsWith(sq) || x.name.toLowerCase().includes(nm));
-  } else {
-    res = TOOLS.filter(x => x.id[0].toUpperCase() === current);
-  }
-  shown = res;
-  grid.innerHTML = res.length ? res.map(card).join("") :
-    `<p class="empty">${raw ? "No tool found. Check the ID in the video description." : "Nothing here yet. Slide to another letter."}</p>`;
+  const res = TOOLS.filter(x => x.id[0].toUpperCase() === current);
+  grid.innerHTML = res.length
+    ? res.map(x => `<div class="card"><span class="id">${esc(x.id)}</span><div class="name">${esc(x.name)}</div><a href="${esc(x.link)}" target="_blank" rel="noopener sponsored">Get link</a></div>`).join("")
+    : `<p class="empty">Nothing here yet. Slide to another letter.</p>`;
   list.scrollTop = 0;
 }
 
@@ -109,7 +87,7 @@ function setLetter(c){
   if(c === current) return;
   current = c;
   items.forEach(i => i.classList.toggle("on", i.dataset.l === c));
-  if(!q.value.trim()) render();
+  render();
 }
 
 function nearest(){
@@ -119,17 +97,143 @@ function nearest(){
   return best;
 }
 
-wheel.addEventListener("scroll", () => { clearTimeout(t); t = setTimeout(() => setLetter(nearest().dataset.l), 60); }, {passive:true});
+/* ===== Real 3D raw banana =====
+   A curved, tapered tube with a rounded-pentagon cross-section (the ridged
+   look of a real banana), a brown stem and a dark tip. Lit and depth-sorted
+   on a canvas, so it truly rotates in 3D. */
+const cv = document.getElementById("b3d");
+const W = 56, H = 56, dpr = Math.min(window.devicePixelRatio || 1, 3);
+cv.width = W * dpr; cv.height = H * dpr;
+const ctx = cv.getContext("2d");
+ctx.scale(dpr, dpr);
+
+const SEG = 40, SIDES = 30, ARC = 0.85, RAD = 1, R0 = 0.2;
+function prof(t){
+  if(t < 0) return R0 * 0.2;                                   // stem
+  if(t <= 1) return R0 * (0.2 + 0.8 * Math.pow(Math.sin(Math.PI * t), 0.65)); // body
+  const u = (t - 1) / 0.04;                                    // blossom tip dome
+  return u >= 1 ? 0 : R0 * 0.2 * Math.sqrt(1 - u * u);
+}
+const ts = [-0.17, -0.12, -0.06];
+for(let i = 0; i <= SEG; i++) ts.push(i / SEG);
+ts.push(1.015, 1.03, 1.04);
+
+const V = [], CP = [];
+ts.forEach(tt => {
+  const th = ARC * (2 * tt - 1);
+  const px = RAD * Math.sin(th), py = RAD - RAD * Math.cos(th);
+  const nx = -Math.sin(th), ny = Math.cos(th);
+  CP.push([px, py, 0]);
+  const ring = [];
+  for(let j = 0; j < SIDES; j++){
+    const ph = 2 * Math.PI * j / SIDES;
+    const r = prof(tt) * (1 + 0.1 * Math.cos(5 * ph));         // 5 ridges
+    const c = Math.cos(ph) * r, s = Math.sin(ph) * r;
+    ring.push([px + c * nx, py + c * ny, s]);
+  }
+  V.push(ring);
+});
+
+let cx = 0, cy = 0, cz = 0, cnt = 0;
+V.forEach(r => r.forEach(v => { cx += v[0]; cy += v[1]; cz += v[2]; cnt++; }));
+cx /= cnt; cy /= cnt; cz /= cnt;
+let maxR = 0;
+V.forEach(r => r.forEach(v => { maxR = Math.max(maxR, Math.hypot(v[0]-cx, v[1]-cy, v[2]-cz)); }));
+const SC = (Math.min(W, H) / 2 - 1) / maxR;
+
+const QUADS = [];
+for(let i = 0; i < ts.length - 1; i++){
+  for(let j = 0; j < SIDES; j++){
+    const j2 = (j + 1) % SIDES;
+    const tm = (ts[i] + ts[i+1]) / 2;
+    const ridge = (Math.cos(5 * 2 * Math.PI * (j + .5) / SIDES) + 1) / 2;
+    QUADS.push({ i, j, j2, tm, ridge, col: baseColor(tm, ridge) });
+  }
+}
+function mix(a, b, k){ return [a[0] + (b[0]-a[0])*k, a[1] + (b[1]-a[1])*k, a[2] + (b[2]-a[2])*k]; }
+function baseColor(tm, ridge){
+  let c = mix([98,150,38], [152,190,66], ridge * ridge * 0.85);   // green body, paler yellow-green ridges
+  const edge = Math.min(tm, 1 - tm);
+  if(tm >= 0 && tm <= 1) c = mix(c, [128,152,62], Math.max(0, 1 - edge / 0.14) * 0.55); // olive shoulders
+  if(tm < 0)  c = mix([112,118,52], [86,64,30], Math.min(1, -tm / 0.17));              // woody stem
+  if(tm > 1)  c = [34,26,16];                                                           // dark blossom tip
+  else if(tm > 0.965) c = mix(c, [34,26,16], (tm - 0.965) / 0.035);
+  return c;
+}
+
+const LV = (() => { const l = [-0.45, 0.65, 0.6], n = Math.hypot(...l); return l.map(x => x / n); })();
+const HV = (() => { const h = [LV[0], LV[1], LV[2] + 1], n = Math.hypot(...h); return h.map(x => x / n); })();
+const TX = 0.15, TZ = -0.95;                       // fixed viewing tilt
+const cX = Math.cos(TX), sX = Math.sin(TX), cZ = Math.cos(TZ), sZ = Math.sin(TZ);
+
+let ang = -35;                                     // degrees, spin about the banana's own axis
+function draw(){
+  const a = ang * Math.PI / 180, cA = Math.cos(a), sA = Math.sin(a);
+  const xf = v => {
+    const x = v[0] - cx, y = v[1] - cy, z = v[2] - cz;
+    // 1) fixed lean (in-plane tilt, then slight look-down), 2) spin around the SCREEN's vertical axis
+    const x1 = x * cZ - y * sZ, y1 = x * sZ + y * cZ;
+    const y2 = y1 * cX - z * sX, z2 = y1 * sX + z * cX;
+    return [x1 * cA + z2 * sA, y2, -x1 * sA + z2 * cA];
+  };
+  const TV = V.map(r => r.map(xf)), TC = CP.map(xf);
+  const out = [];
+  for(const q of QUADS){
+    const A = TV[q.i][q.j], B = TV[q.i][q.j2], C = TV[q.i+1][q.j2], D = TV[q.i+1][q.j];
+    const e1 = [C[0]-A[0], C[1]-A[1], C[2]-A[2]], e2 = [D[0]-B[0], D[1]-B[1], D[2]-B[2]];
+    let n = [e1[1]*e2[2]-e1[2]*e2[1], e1[2]*e2[0]-e1[0]*e2[2], e1[0]*e2[1]-e1[1]*e2[0]];
+    const len = Math.hypot(n[0], n[1], n[2]);
+    if(len < 1e-9) continue;
+    n = [n[0]/len, n[1]/len, n[2]/len];
+    const mx = (A[0]+B[0]+C[0]+D[0]) / 4, my = (A[1]+B[1]+C[1]+D[1]) / 4, mz = (A[2]+B[2]+C[2]+D[2]) / 4;
+    const c0 = TC[q.i], c1 = TC[q.i+1];
+    const ox = mx - (c0[0]+c1[0]) / 2, oy = my - (c0[1]+c1[1]) / 2, oz = mz - (c0[2]+c1[2]) / 2;
+    if(n[0]*ox + n[1]*oy + n[2]*oz < 0) n = [-n[0], -n[1], -n[2]];
+    if(n[2] <= 0.0) continue;                       // back-face
+    const diff = Math.max(0, n[0]*LV[0] + n[1]*LV[1] + n[2]*LV[2]);
+    const spec = Math.pow(Math.max(0, n[0]*HV[0] + n[1]*HV[1] + n[2]*HV[2]), 22) * (q.tm > 1 ? 0.1 : 0.3);
+    const lit = 0.4 + 0.65 * diff;
+    const col = q.col.map(c => Math.max(0, Math.min(255, Math.round(c * lit + spec * 255))));
+    out.push({ z: mz, col: "rgb(" + col.join(",") + ")", p: [A, B, C, D] });
+  }
+  out.sort((p, q) => p.z - q.z);
+  ctx.clearRect(0, 0, W, H);
+  ctx.lineJoin = "round"; ctx.lineWidth = 0.7;
+  for(const f of out){
+    ctx.beginPath();
+    f.p.forEach((v, k) => { const x = W/2 + v[0]*SC, y = H/2 - v[1]*SC; k ? ctx.lineTo(x, y) : ctx.moveTo(x, y); });
+    ctx.closePath();
+    ctx.fillStyle = f.col; ctx.strokeStyle = f.col;
+    ctx.fill(); ctx.stroke();
+  }
+}
+
+// logo banana spins with the letter scroll: eased, time-based, always smooth
+let vel = 0, target = 0, lastX = 0, running = false, lastT = 0;
+function tick(now){
+  const dt = Math.min(40, now - lastT) / 16.67; lastT = now;
+  vel += (target - vel) * (1 - Math.pow(0.88, dt));   // glide toward the scroll speed
+  target *= Math.pow(0.9, dt);                         // scroll push fades out
+  ang += vel * dt;
+  draw();
+  if(Math.abs(vel) > 0.04 || Math.abs(target) > 0.04) requestAnimationFrame(tick); else running = false;
+}
+draw();
+
+wheel.addEventListener("scroll", () => {
+  clearTimeout(t); t = setTimeout(() => setLetter(nearest().dataset.l), 60);
+  const x = wheel.scrollLeft;
+  if(!calm){
+    target = Math.max(-40, Math.min(40, (x - lastX) * 1.1));
+    if(!running){ running = true; lastT = performance.now(); requestAnimationFrame(tick); }
+  }
+  lastX = x;
+}, {passive:true});
+
 items.forEach(i => i.addEventListener("click", () => {
-  q.value = "";
-  const c = i.dataset.l;
-  if(c === current) render(); else setLetter(c);
+  setLetter(i.dataset.l);
   i.scrollIntoView({behavior:"smooth", inline:"center", block:"nearest"});
 }));
-q.addEventListener("input", render);
-q.addEventListener("keydown", e => {
-  if(e.key === "Enter"){ if(exact && shown.length === 1) window.open(shown[0].link, "_blank", "noopener"); q.blur(); }
-});
 
 items[0].classList.add("on");
 render();

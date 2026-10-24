@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Straight2Pointt</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;500;600&family=Oswald:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#DBC99E;--card:#F1E8D0;--ink:#1E1A12;--rust:#C4481F;--rust2:#E0572B;--mute:#6f6544;--mono:"IBM Plex Mono",ui-monospace,Menlo,monospace}
+*{box-sizing:border-box;margin:0}
+html,body{height:100%}
+body{font-family:var(--mono);color:var(--ink);display:flex;flex-direction:column;overflow:hidden;background-color:var(--bg);background-image:linear-gradient(rgba(30,26,18,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(30,26,18,.06) 1px,transparent 1px);background-size:28px 28px}
+header{padding:calc(env(safe-area-inset-top,0px) + 16px) 14px 8px}
+h1{font-family:"Bebas Neue","Oswald",Impact,sans-serif;font-weight:400;font-size:2.6rem;line-height:.95;letter-spacing:.01em;text-transform:uppercase;margin-bottom:12px}
+h1 b{color:var(--rust);font-weight:400}
+#q{width:100%;font:inherit;font-size:.9rem;padding:13px 14px;border:1.5px dashed var(--ink);border-radius:14px;background:var(--card);color:var(--ink);outline:none}
+#q::placeholder{color:var(--mute)}
+#q:focus{border-style:solid;border-color:var(--rust);box-shadow:3px 3px 0 var(--rust)}
+main{flex:1;overflow-y:auto;padding:8px 14px 16px}
+#grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+.card{display:flex;flex-direction:column;gap:6px;background:var(--card);border:1px solid rgba(30,26,18,.25);border-top:3px dashed var(--rust);border-radius:12px;padding:7px;box-shadow:1px 2px 4px rgba(30,26,18,.25);animation:pop .3s ease-out both}
+@keyframes pop{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.id{align-self:flex-start;border:1px solid var(--rust);color:var(--rust);border-radius:2px;padding:0 5px;font-weight:600;font-size:.68rem;letter-spacing:.04em}
+.name{font-family:"Oswald",sans-serif;font-weight:500;font-size:.88rem;line-height:1.15;min-height:2.3em;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.card a{display:block;text-align:center;text-decoration:none;font-weight:500;font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;padding:6px 2px;border-radius:8px;background:var(--ink);color:var(--card)}
+.card a:active{background:var(--rust)}
+.empty{grid-column:1/-1;text-align:center;color:var(--mute);font-size:.8rem;padding:40px 10px}
+
+/* radio-dial letter picker */
+nav{position:relative;background:var(--ink);border-top:3px dashed var(--rust);padding:16px 0 calc(env(safe-area-inset-bottom,0px) + 8px)}
+nav::before{content:"";position:absolute;left:50%;top:0;margin-left:-8px;border:8px solid transparent;border-top:11px solid var(--rust2);border-bottom:0;z-index:2;pointer-events:none}
+#wheel{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch;-webkit-mask-image:linear-gradient(90deg,transparent,#000 22%,#000 78%,transparent);mask-image:linear-gradient(90deg,transparent,#000 22%,#000 78%,transparent)}
+#wheel::-webkit-scrollbar{display:none}
+#wheel i{flex:0 0 52px;height:70px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:6px;scroll-snap-align:center;cursor:pointer;font-style:normal;user-select:none;color:#7d7355;font-weight:500;font-size:1.05rem}
+#wheel i::after{content:"";width:1.5px;height:10px;background:#4d4630;transition:height .2s,background .2s}
+#wheel i.has{color:var(--card)}
+#wheel i span{display:block;transition:transform .2s,color .2s}
+#wheel i.on span{transform:translateY(-6px) scale(1.7);color:var(--rust2);font-weight:600}
+#wheel i.on::after{height:22px;background:var(--rust2)}
+#wheel i.spacer{flex:0 0 calc(50% - 26px);pointer-events:none}
+#wheel i.spacer::after{display:none}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media (min-width:700px){main,header{max-width:560px;width:100%;margin:0 auto}}
+</style>
+</head>
+<body>
+<header>
+  <h1>Straight<b>2</b>Pointt</h1>
+  <input id="q" type="search" placeholder="Search A01, B12 or a tool name" autocomplete="off" enterkeyhint="search">
+</header>
+<main id="list"><div id="grid"></div></main>
+<nav><div id="wheel"></div></nav>
+
+<script>
+/* ===== ADD YOUR TOOLS HERE =====
+   One tool per line:  ID | Tool name | Link
+   Copy a line, paste it below the last one, change the parts.
+   Lines starting with # are ignored. */
+const DATA = `
+A01 | Inbox Zero | https://www.getinboxzero.com/
+`;
+/* ================================== */
+
+const TOOLS = DATA.split("\n").map(l => l.trim()).filter(l => l && l[0] !== "#").map(l => {
+  const p = l.split("|").map(x => x.trim());
+  return { id:(p[0]||"").toUpperCase(), name:p[1]||"", link:p[2]||"" };
+}).filter(x => x.id && x.link);
+
+const L = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+const grid = document.getElementById("grid"), list = document.getElementById("list"), wheel = document.getElementById("wheel"), q = document.getElementById("q");
+let current = "A", t;
+
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const used = new Set(TOOLS.map(x => x.id[0].toUpperCase()));
+
+wheel.innerHTML = '<i class="spacer"></i>' + L.map(c => `<i data-l="${c}" class="${used.has(c)?"has":""}"><span>${c}</span></i>`).join("") + '<i class="spacer"></i>';
+const items = [...wheel.querySelectorAll("[data-l]")];
+
+function card(x){
+  return `<div class="card"><span class="id">${esc(x.id)}</span><div class="name">${esc(x.name)}</div>
+  <a href="${esc(x.link)}" target="_blank" rel="noopener sponsored">Get link</a></div>`;
+}
+
+// "a1", "a 01", "A-01" all become the same key
+const squash = s => String(s).toLowerCase().replace(/[^a-z0-9]/g,"");
+const key = s => squash(s).replace(/^([a-z])0+(?=\d)/,"$1");
+let shown = [], exact = false;
+
+function render(){
+  const raw = q.value.trim();
+  let res;
+  exact = false;
+  if(raw){
+    const k = key(raw), sq = squash(raw), nm = raw.toLowerCase();
+    res = TOOLS.filter(x => key(x.id) === k);
+    if(res.length){ exact = true; }
+    else res = TOOLS.filter(x => key(x.id).startsWith(k) || squash(x.id).startsWith(sq) || x.name.toLowerCase().includes(nm));
+  } else {
+    res = TOOLS.filter(x => x.id[0].toUpperCase() === current);
+  }
+  shown = res;
+  grid.innerHTML = res.length ? res.map(card).join("") :
+    `<p class="empty">${raw ? "No tool found. Check the ID in the video description." : "Nothing here yet. Slide to another letter."}</p>`;
+  list.scrollTop = 0;
+}
+
+function setLetter(c){
+  if(c === current) return;
+  current = c;
+  items.forEach(i => i.classList.toggle("on", i.dataset.l === c));
+  if(!q.value.trim()) render();
+}
+
+function nearest(){
+  const mid = wheel.scrollLeft + wheel.clientWidth/2;
+  let best, d = 1e9;
+  items.forEach(i => { const m = Math.abs(i.offsetLeft + i.offsetWidth/2 - mid); if(m < d){ d = m; best = i; } });
+  return best;
+}
+
+wheel.addEventListener("scroll", () => { clearTimeout(t); t = setTimeout(() => setLetter(nearest().dataset.l), 60); }, {passive:true});
+items.forEach(i => i.addEventListener("click", () => {
+  q.value = "";
+  const c = i.dataset.l;
+  if(c === current) render(); else setLetter(c);
+  i.scrollIntoView({behavior:"smooth", inline:"center", block:"nearest"});
+}));
+q.addEventListener("input", render);
+q.addEventListener("keydown", e => {
+  if(e.key === "Enter"){ if(exact && shown.length === 1) window.open(shown[0].link, "_blank", "noopener"); q.blur(); }
+});
+
+items[0].classList.add("on");
+render();
+</script>
+</body>
+</html>

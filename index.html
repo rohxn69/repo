@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>RawBanana</title>
+<title>rawBanana</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;500;600&family=Oswald:wght@500;600&display=swap" rel="stylesheet">
 <style>
@@ -10,9 +10,13 @@
 *{box-sizing:border-box;margin:0}
 html,body{height:100%}
 body{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;color:var(--ink);display:flex;flex-direction:column;overflow:hidden;background-color:var(--bg);background-image:linear-gradient(rgba(43,35,0,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(43,35,0,.07) 1px,transparent 1px);background-size:28px 28px}
-header{padding:calc(env(safe-area-inset-top,0px) + 18px) 14px 6px}
-h1{display:flex;align-items:center;justify-content:center;gap:0;font-family:"Bebas Neue","Oswald",Impact,sans-serif;font-weight:400;font-size:2.8rem;line-height:.95;letter-spacing:.01em;text-transform:uppercase}
-h1 b{color:var(--accent);font-weight:400}
+header{position:relative;padding:calc(env(safe-area-inset-top,0px) + 18px) 14px 6px}
+.social{position:absolute;top:calc(env(safe-area-inset-top,0px) + 14px);right:14px;display:flex;flex-direction:column;gap:9px}
+.social a{display:block;width:15px;height:15px;color:var(--ink);opacity:.5;transition:opacity .2s,color .2s}
+.social a:hover,.social a:active{opacity:1;color:var(--accent)}
+.social svg{display:block;width:100%;height:100%;fill:currentColor}
+h1{display:flex;align-items:center;justify-content:center;gap:0;font-family:"Oswald",Impact,sans-serif;font-weight:600;font-size:2.5rem;line-height:.95;letter-spacing:.01em;text-transform:none}
+h1 b{color:var(--accent);font-weight:600}
 .logo{display:block;position:relative;width:56px;height:56px;flex:none;margin-right:-10px}
 .logo canvas{display:block;width:100%;height:100%;filter:drop-shadow(1px 2px 1.5px rgba(43,35,0,.35))}
 main{flex:1;overflow-y:auto;padding:10px 14px 16px}
@@ -44,25 +48,45 @@ nav::before{content:"";position:absolute;left:50%;top:0;margin-left:-8px;border:
 </head>
 <body>
 <header>
-  <h1><span class="logo" aria-hidden="true"><canvas id="b3d"></canvas></span><span><b>Raw</b>Banana</span></h1>
+  <h1><span class="logo" aria-hidden="true"><canvas id="b3d"></canvas></span><span><b>raw</b>Banana</span></h1>
+  <div class="social">
+    <a href="https://instagram.com/rawbananaa" target="_blank" rel="noopener" aria-label="Instagram @rawbananaa" title="Instagram">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.8.1 3.3.1 4.8 1.7 4.9 4.9.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 3.2-1.7 4.8-4.9 4.9-1.3.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-3.3-.1-4.8-1.7-4.9-4.9C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8C2.4 3.9 4 2.4 7.2 2.3 8.4 2.2 8.8 2.2 12 2.2zM12 0C8.7 0 8.3 0 7.1.1 2.7.3.3 2.7.1 7.1 0 8.3 0 8.7 0 12s0 3.7.1 4.9c.2 4.4 2.6 6.8 7 7C8.3 24 8.7 24 12 24s3.7 0 4.9-.1c4.4-.2 6.8-2.6 7-7 .1-1.2.1-1.6.1-4.9s0-3.7-.1-4.9c-.2-4.4-2.6-6.8-7-7C15.7 0 15.3 0 12 0zm0 5.8a6.2 6.2 0 1 0 0 12.4 6.2 6.2 0 0 0 0-12.4zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.8a1.4 1.4 0 1 0 0 2.9 1.4 1.4 0 0 0 0-2.9z"/></svg>
+    </a>
+    <a href="mailto:getrawbanana@gmail.com" aria-label="Email getrawbanana@gmail.com" title="Email">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 5h20a1 1 0 0 1 1 1v.4l-11 7.1L1 6.4V6a1 1 0 0 1 1-1zm-1 3.7 10.5 6.8a1 1 0 0 0 1 0L23 8.7V18a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V8.7z"/></svg>
+    </a>
+    <a href="https://x.com/rawbananaa" target="_blank" rel="noopener" aria-label="X @rawbananaa" title="X">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.2 2.3h3.4l-7.4 8.5 8.7 11.5h-6.8l-5.3-7-6.1 7H1.3l7.9-9.1L.9 2.3h7l4.8 6.4 5.5-6.4zm-1.2 18h1.9L6.9 4.2H4.9L17 20.3z"/></svg>
+    </a>
+  </div>
 </header>
 <main id="list"><div id="grid"></div></main>
 <nav><div id="wheel"></div></nav>
 
 <script>
 /* ===== ADD YOUR TOOLS HERE =====
-   One tool per line:  ID | Tool name | Link
+   One tool per line:  ID | Tool name | Link | Date (ddmmyyyy)
+   The tool becomes visible ON that date (India time, IST) and stays visible after.
+   Leave the date off to show the tool right away.
    Copy a line, paste it below the last one, change the parts.
    Lines starting with # are ignored. */
 const DATA = `
-A01 | Inbox Zero | https://www.getinboxzero.com/
+A01 | Inbox Zero | https://www.getinboxzero.com/ | 25102026
 `;
 /* ================================== */
 
 const TOOLS = DATA.split("\n").map(l => l.trim()).filter(l => l && l[0] !== "#").map(l => {
   const p = l.split("|").map(x => x.trim());
-  return { id:(p[0]||"").toUpperCase(), name:p[1]||"", link:p[2]||"" };
+  const d = (p[3] || "").replace(/\D/g, "");
+  // ddmmyyyy -> yyyymmdd (sortable); empty/invalid = always visible
+  const when = d.length === 8 ? d.slice(4) + d.slice(2, 4) + d.slice(0, 2) : "";
+  return { id:(p[0]||"").toUpperCase(), name:p[1]||"", link:p[2]||"", when };
 }).filter(x => x.id && x.link);
+
+// today's date in India (IST), as yyyymmdd
+const todayIST = () => new Date().toLocaleDateString("en-CA", { timeZone:"Asia/Kolkata" }).replace(/-/g, "");
+const isLive = x => !x.when || x.when <= todayIST();
 
 const L = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 const grid = document.getElementById("grid"), list = document.getElementById("list"), wheel = document.getElementById("wheel");
@@ -70,13 +94,13 @@ const calm = matchMedia("(prefers-reduced-motion: reduce)").matches;
 let current = "A", t;
 
 const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-const used = new Set(TOOLS.map(x => x.id[0].toUpperCase()));
+const used = new Set(TOOLS.filter(isLive).map(x => x.id[0].toUpperCase()));
 
 wheel.innerHTML = '<i class="spacer"></i>' + L.map(c => `<i data-l="${c}" class="${used.has(c)?"has":""}"><span>${c}</span></i>`).join("") + '<i class="spacer"></i>';
 const items = [...wheel.querySelectorAll("[data-l]")];
 
 function render(){
-  const res = TOOLS.filter(x => x.id[0].toUpperCase() === current);
+  const res = TOOLS.filter(x => isLive(x) && x.id[0].toUpperCase() === current);
   grid.innerHTML = res.length
     ? res.map(x => `<div class="card"><span class="id">${esc(x.id)}</span><div class="name">${esc(x.name)}</div><a href="${esc(x.link)}" target="_blank" rel="noopener sponsored">Get link</a></div>`).join("")
     : `<p class="empty">Nothing here yet. Slide to another letter.</p>`;
